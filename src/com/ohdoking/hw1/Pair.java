@@ -7,6 +7,7 @@ public class Pair {
 	public Integer checkPair(String sValue) {
 		byte[] stringByte = StringToByte(sValue);
 		int correctResultNum = 0;
+		boolean CheckSignOfInequality = false;
 		Stack<Character> stack = new Stack<Character>();
 		char[] charArr = (new String(stringByte)).toCharArray();
 
@@ -15,29 +16,39 @@ public class Pair {
 			if(charArr[i] == '#'){
 				break;
 			}
-			if (charArr[i] == '(' 
-					|| charArr[i] == '[' 
-					|| charArr[i] == '{'
-					|| charArr[i] == '<' 
-					) {
-				stack.add(charArr[i]);
+			
+			if(charArr[i] == '<' || charArr[i] == '>' ){
+				CheckSignOfInequality = isCheckSignOfInequality(charArr,i);
+			}
+			if(CheckSignOfInequality == true){
+				
+			}
+			else{
+				if (charArr[i] == '(' 
+						|| charArr[i] == '[' 
+						|| charArr[i] == '{'
+						|| charArr[i] == '<' 
+						) {
+					stack.add(charArr[i]);
+				}
+				
+				if(charArr[i] == '>'
+						|| charArr[i] == '}' 
+						|| charArr[i] == ']'
+						|| charArr[i] == ')'){
+					
+					if(stack.isEmpty()){
+						return i+1;
+					}
+					if(charArr[i] == pairKey(stack.lastElement())){
+						stack.pop();
+					}
+					else{
+						return i+1;
+					}
+				}
 			}
 			
-			if(charArr[i] == '>'
-					|| charArr[i] == '}' 
-					|| charArr[i] == ']'
-					|| charArr[i] == ')'){
-				
-				if(stack.isEmpty()){
-					return i+1;
-				}
-				if(charArr[i] == pairKey(stack.lastElement())){
-					stack.pop();
-				}
-				else{
-					return i+1;
-				}
-			}
 		}
 
 	
@@ -65,29 +76,47 @@ public class Pair {
 		if(index == 1){
 			return false;
 		}
-		
-		if(array[index - 1] == '('
-				|| array[index - 1] == '['
-				|| array[index - 1] == '{'
-				|| array[index - 1] == '<'
-				|| array[index - 1] == '>'
-				|| array[index - 1] == '}'
-				|| array[index - 1] == ']'
-				|| array[index - 1] == ')'
-				|| array[index + 1] == '('
-				|| array[index + 1] == '['
-				|| array[index + 1] == '{'
-				|| array[index + 1] == '<'
-				|| array[index + 1] == '>'
-				|| array[index + 1] == '}'
-				|| array[index + 1] == ']'
-				|| array[index + 1] == ')')
+		System.out.println(array[index - 2] + " : " + array[index + 2]);
+		if(		 array[index - 2] == '['
+				|| array[index - 2] == '{'
+				|| array[index - 2] == '<'
+				|| array[index - 2] == '>'
+				|| array[index - 2] == '}'
+				|| array[index - 2] == ']'
+				|| array[index + 2] == '['
+				|| array[index + 2] == '{'
+				|| array[index + 2] == '<'
+				|| array[index + 2] == '>'
+				|| array[index + 2] == '}'
+				|| array[index + 2] == ']')
 		{
-		
+			if(array[index - 2] == '(' 
+				|| array[index - 2] == ')'
+				|| array[index + 2] == '('
+				|| array[index + 2] == ')')
+			{
+				if(		 array[index - 2] == '['
+						|| array[index - 2] == '{'
+						|| array[index - 2] == '<'
+						|| array[index - 2] == '>'
+						|| array[index - 2] == '}'
+						|| array[index - 2] == ']'
+						|| array[index + 2] == '['
+						|| array[index + 2] == '{'
+						|| array[index + 2] == '<'
+						|| array[index + 2] == '>'
+						|| array[index + 2] == '}'
+						|| array[index + 2] == ']')
+				{
+					return false;
+				}
+				return true;
+			}
+			return false;
 			
 		}
 		
-		return false;
+		return true;
 		
 	}
 

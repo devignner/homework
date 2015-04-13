@@ -1,14 +1,8 @@
 package com.ohdoking.hw1;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Scanner;
-import java.util.Stack;
 
 public class PairStackMain {
 
@@ -33,11 +27,6 @@ public class PairStackMain {
 				if(result == 0)
 				{
 					System.out.println("올바름");
-				}
-				else if(result == 1)
-				{
-					System.out.println("닫히지 않고 끝났습니다");
-					
 				}
 				else
 				{
