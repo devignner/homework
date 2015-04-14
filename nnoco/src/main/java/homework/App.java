@@ -11,15 +11,5 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println(args);
-
-        try {
-        	List<String> lines = InputFileReader.getLines(args[0]);
-        	for(String line : lines) {
-        		System.out.println(line);
-        	}
-        } catch (IOException e) {
-        	e.printStackTrace();
-        }
     }
 }
